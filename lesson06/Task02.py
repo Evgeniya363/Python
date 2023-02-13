@@ -3,6 +3,8 @@
 # (т.е. не меньше заданного минимума и не больше заданного максимума)
 from random import randint
 
+M = 100 # Максимальная величина элементов массива
+
 # Функция ввода целого натурального числа из заданного диапазона
 def input_number(inp_str, begin = 0, end = 1):
     resalt = -1
@@ -10,12 +12,14 @@ def input_number(inp_str, begin = 0, end = 1):
         resalt = int(input(inp_str))
     return resalt
 
-n = input_number(f'\nДан массив M[1, n]\nВведите размерность массива n: ', 1, 100)
+n = input_number(f'\nВведите размерность массива n: ', 1, M)
 
-# Задавать массив для данной задачи смысла нет
-# my_list = [randint(1,99) for i in range(n)]
+my_list = [randint(1, M) for i in range(n)]
+print('Сформирован массив: ', my_list)
 
-d1  = input_number(f'Введите индекс d1 в диапазоне [1, {n}]: ', 1, n)
-d2  = input_number(f'Введите индекс d2 в диапазоне [{d1}, {n}]: ', d1, n)
+d1  = input_number(f'Введите нижнюю границу значений [1, {M}]: ', 1, M)
+d2  = input_number(f'Введите верхнюю границу значений [{d1}, {M}]: ', d1, M)
 
-print(f'\nИндексы массива M[1, n], принадлежащие диапазону [{d1}, {d2}]: {[i for i in range(d1, d2 + 1)]}\n')
+ind_list = [i for i in range(len(my_list)) if d1 <= my_list[i] <= d2]
+
+print(f'\nИндексы массива M[1, n] элементов,\nпринадлежащих диапазону  значений [{d1}, {d2}]: {ind_list}\n')
